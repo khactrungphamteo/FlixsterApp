@@ -14,7 +14,6 @@ private const val TAG = "MovieAdapter"
 class MovieAdapter(private val context: Context, private val movies: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.i(TAG, "onCreateView")
         val view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
