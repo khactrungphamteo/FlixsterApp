@@ -14,7 +14,7 @@ private const val TAG = "MainActivity"
 private const val NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"
 class MainActivity : AppCompatActivity() {
 
-    private val movies = mutableListOf<Movie>()
+    private val movies = mutableListOf<Movie>() // add all the movies that were parsed into the list
     private lateinit var rvMovies: RecyclerView
     // 1. Define a data model class as the data source
     // 2. Add the RecyclerView to the Layout
@@ -25,12 +25,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         rvMovies = findViewById(R.id.rvMovies)
 
         val movieAdapter = MovieAdapter(this, movies)
         rvMovies.adapter = movieAdapter
         rvMovies.layoutManager = LinearLayoutManager(this)
 
+        // make API call to the database
         val client = AsyncHttpClient()
         client.get(NOW_PLAYING_URL, object: JsonHttpResponseHandler() {
             override fun onFailure(
@@ -53,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                     Log.e(TAG, "Encountered exception $e")
                 }
             }
-
         })
 
     }
